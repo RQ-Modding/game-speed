@@ -6,7 +6,7 @@
 -- F8 turns it off and on; it starts off, and remembers. Hold F3 for the Game Speed page: 1-4 change each area, 0 is F8.
 -- Sound stays at normal speed, and so does the play time on the save.
 
-local STEPS = { 1, 2, 3, 4 }
+local STEPS = { 1, 1.5, 2, 3, 4 }
 -- The game takes F1 to F7 (town and Config tabs), the engine F9, F11 and F12.
 local TOGGLE = rq.input.code("f8")
 local NOTE_MS = 2000

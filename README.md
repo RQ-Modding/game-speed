@@ -12,7 +12,7 @@ Runs the game faster by what is on screen, with one factor per area:
 The innermost area on screen wins: a fade inside a fight uses the transition factor. Everywhere else the clock is real.
 
 - **F8** turns the mod off and on, with a note at the top of the screen. It starts **off**, and remembers. (Not F4: the game uses F1 to F7 for the town and Config tabs.)
-- Hold **F3** for the **Game Speed** page: **1** to **4** step an area through 1x, 2x, 3x, 4x; **0** is the same as F8.
+- Hold **F3** for the **Game Speed** page: **1** to **4** step an area through 1x, 1.5x, 2x, 3x, 4x; **0** is the same as F8.
 - Settings live in the mod's `rq.store`, next to the active save profile.
 
 Sound and music stay at normal speed, and so does the play time on the save. The level up status screen still waits for you.
