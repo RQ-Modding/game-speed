@@ -1,0 +1,8 @@
+{
+  "id": "game-speed",
+  "name": "Game Speed",
+  "author": "Magnum Mods",
+  "version": "1.0.0",
+  "loader": "1.2.0",
+  "priority": 0
+}
