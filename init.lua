@@ -3,11 +3,12 @@
 --   Transitions: fades and screen effects, the way into and out of a fight.
 --   Fight:       the fight itself, on top of the game's own battle speed.
 --   Level up:    the EXP bars and the level up animations. The status screen still waits for you.
--- F4 turns it off and on; it starts off, and remembers. Hold F3 for the Game Speed page: 1-4 change each area, 0 is F4.
+-- F8 turns it off and on; it starts off, and remembers. Hold F3 for the Game Speed page: 1-4 change each area, 0 is F8.
 -- Sound stays at normal speed, and so does the play time on the save.
 
 local STEPS = { 1, 2, 3, 4 }
-local TOGGLE = rq.input.code("f4")
+-- The game takes F1 to F7 (town and Config tabs), the engine F9, F11 and F12.
+local TOGGLE = rq.input.code("f8")
 local NOTE_MS = 2000
 
 local AREAS = {
@@ -98,7 +99,7 @@ end
 function rows.toggle()
   rq.debug.action{
     id = "game-speed-on",
-    label = "Game speed (F4): " .. (on and "On" or "Off"),
+    label = "Game speed (F8): " .. (on and "On" or "Off"),
     key = "0",
     page = "Game Speed",
     onPress = function() set_on(not on) end,
