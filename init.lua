@@ -4,6 +4,7 @@
 --   Fight:       the fight itself, on top of the game's own battle speed.
 --   Level up:    the EXP bars and the level up animations. The status screen still waits for you.
 -- F8 turns it off and on; it starts off, and remembers. Hold F3 for the Game Speed page: 1-4 change each area, 0 is F8.
+-- Config has the same settings in its Mods tab (loader 1.8.0).
 -- Sound stays at normal speed, and so does the play time on the save.
 
 local STEPS = { 1, 1.5, 2, 3, 4 }
@@ -106,7 +107,16 @@ function rows.toggle()
   }
 end
 
-local function area_row(a)
+local area_row
+
+local function set_factor(a, f)
+  factor[a.id] = f
+  rq.store.set(a.id, f)
+  area_row(a)
+  apply()
+end
+
+function area_row(a)
   rq.debug.action{
     id = "game-speed-" .. a.id,
     label = a.label .. ": " .. factor[a.id] .. "x",
@@ -117,10 +127,7 @@ local function area_row(a)
       for i, s in ipairs(STEPS) do
         if s == factor[a.id] then next_f = STEPS[i % #STEPS + 1] end
       end
-      factor[a.id] = next_f
-      rq.store.set(a.id, next_f)
-      area_row(a)
-      apply()
+      set_factor(a, next_f)
       show(summary())
     end,
   }
@@ -128,6 +135,35 @@ end
 
 rows.toggle()
 for _, a in ipairs(AREAS) do area_row(a) end
+
+if rq.config then
+  local names = {}
+  for i, s in ipairs(STEPS) do names[i] = s .. "x" end
+  local function step_of(f)
+    for i, s in ipairs(STEPS) do
+      if s == f then return i end
+    end
+  end
+  rq.config.page{
+    id = "game-speed",
+    title = "Game Speed",
+    draw = function(ui)
+      local v, changed = ui.checkbox(on, "Faster game clock (F8)", { id = "on" })
+      if changed then set_on(v) end
+      ui.space(0, 8)
+      for _, a in ipairs(AREAS) do
+        ui.row({ gap = 16, align = "center", h = 30 }, function()
+          ui.label(a.label, { w = 150, dim = not on })
+          local i, c = ui.choice(names, step_of(factor[a.id]), { id = a.id, dir = "row", gap = 18 })
+          if c then set_factor(a, STEPS[i]) end
+        end)
+      end
+      ui.space(0, 12)
+      ui.label("Sound and music stay at normal speed, and so does the play time.", { dim = true, size = 15 })
+      ui.label("The level up status screen still waits for you.", { dim = true, size = 15 })
+    end,
+  }
+end
 
 local toggle_down = false
 rq.on_frame(function()
