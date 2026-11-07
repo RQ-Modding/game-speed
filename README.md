@@ -1,31 +1,51 @@
-# game-speed
+# Game Speed
 
-Runs the game faster by what is on screen, with one factor per area:
+Runs the game faster, with its own speed for each part of the game.
+
+## What it changes
 
 | Area | When | Default |
 | --- | --- | --- |
-| Exploration | walking a quest map (`rq.dungeon.exploring()`) | 2x |
-| Transitions | fades and screen effects (`_EFFECT`, `SYS_画面更新`, `効果_マップ転移`, `効果_戦闘準備`) and the way into and out of a fight (`Ｒ８戦闘_前処理`, `Ｒ８戦闘_後処理`) | 2x |
-| Fight | the fight itself (`Ｒ８戦闘`), on top of the game's own battle speed | 2x |
-| Level up | the result screen (`戦闘リザルト_表示`): EXP bars and level up animations | 2x |
+| Exploration | walking a quest map | 2x |
+| Transitions | fades and screen effects, and the way into and out of a fight | 2x |
+| Fight | the fight itself, on top of the game's own battle speed | 2x |
+| Level up | the result screen: EXP bars and level up animations | 2x |
 
-The innermost area on screen wins: a fade inside a fight uses the transition factor. Everywhere else the clock is real.
+A fade inside a fight uses the Transitions speed. Everywhere else (town, menus, scenes) the game
+runs at normal speed. Sound and music stay at normal speed, and so does the play time on the save.
+The level up status screen still waits for you.
 
-- **F8** turns the mod off and on, with a note at the top of the screen. It starts **off**, and remembers. (Not F4: the game uses F1 to F7 for the town and Config tabs.)
-- Hold **F3** for the **Game Speed** page: **1** to **4** step an area through 1x, 1.5x, 2x, 3x, 4x; **0** is the same as F8.
-- With loader 1.8.0, **Config → Mods → Game Speed** has the same settings: a checkbox for on and off, and a row of steps for each area.
-- Settings live in the mod's `rq.store`, next to the active save profile.
+## Keys and settings
 
-Sound and music stay at normal speed, and so does the play time on the save. The level up status screen still waits for you.
+- **F8** turns the mod on and off, with a note at the top of the screen. It starts **off**, and
+  remembers.
+- Hold **F3** for the **Game Speed** page: **1** to **4** step an area through 1x, 1.5x, 2x, 3x and
+  4x; **0** is the same as F8.
+- With loader 1.8.0 or newer, **Config → Mods → Game Speed** has the same settings: a checkbox for on
+  and off, and a row of speeds for each area.
 
-The mod sets the clock only when its own choice changes, so a factor another mod sets with `rq.speed.set` stays until the screen changes.
+## Saves
 
-## Needs
+The settings are kept in the mod's store, beside the active save. The game's save is not changed.
 
-Loader 1.2.0 (`rq.speed`).
+## Works with
 
-## Test
+Another mod that sets the game clock (`rq.speed.set`) keeps its speed until the screen changes; this
+mod sets the clock only when its own choice changes.
 
-`rqmod\agent-lab.ps1 run gamespeed`: exploration, F8 off and on, the way into a fight, the fight, the F3 page, the result screen, the way out.
+## Install
 
-Local-only git. No remote.
+Needs [RQ MOD](https://github.com/RQ-Modding/RQ-Mod) with loader **1.2.0** or newer (1.8.0 for the
+Config page). Extract the release zip into the game's `mods` folder, so that you have
+`mods/game-speed/mod.json`.
+
+## How it works
+
+Each area is a set of the game's functions: `_EFFECT`, `SYS_画面更新`, `効果_マップ転移`,
+`効果_戦闘準備`, `Ｒ８戦闘_前処理` and `Ｒ８戦闘_後処理` for Transitions, `Ｒ８戦闘` for Fight,
+`戦闘リザルト_表示` for Level up, and `rq.dungeon.exploring()` for Exploration. The innermost one
+running wins.
+
+## License
+
+MIT, see [LICENSE](LICENSE).

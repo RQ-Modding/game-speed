@@ -1,4 +1,5 @@
 {
+  "$schema": "https://rq-modding.github.io/rq-modding-docs/schemas/mod.schema.json",
   "id": "game-speed",
   "name": "Game Speed",
   "author": "Magnum Mods",
