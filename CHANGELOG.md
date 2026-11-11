@@ -3,6 +3,11 @@
 Each section is a version of the mod, the `version` in `mod.json`. The release workflow copies the
 section of a tagged version into the release notes.
 
+## 1.2.1
+
+- On a quest's map, the F8 note shows under the encounter bar, centered on the 3D view, not over
+  the bar.
+
 ## 1.2.0
 
 - A Game Speed page in Config's Mods tab, with loader 1.8.0 or newer.

@@ -3,7 +3,7 @@
   "id": "game-speed",
   "name": "Game Speed",
   "author": "Moru Zerinho6",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "loader": "1.2.0",
   "priority": 0
 }

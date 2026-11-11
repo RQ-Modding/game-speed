@@ -177,8 +177,11 @@ rq.on_frame(function()
     else
       local w = rq.hud.screen()
       local tw = rq.hud.text_width(note, 18)
-      rq.hud.rect((w - tw) // 2 - 10, 8, tw + 20, 28, 0, 0, 0, 170)
-      rq.hud.text((w - tw) // 2, 12, note, { size = 18 })
+      -- On a quest's map: centered on the 3D view (8 to 807), under the encounter bar (y 9, 12 high).
+      local cx, y = w // 2, 8
+      if rq.dungeon.exploring() then cx, y = 408, 26 end
+      rq.hud.rect(cx - tw // 2 - 10, y, tw + 20, 28, 0, 0, 0, 170)
+      rq.hud.text(cx - tw // 2, y + 4, note, { size = 18 })
     end
   end
 end)

@@ -17,8 +17,8 @@ The level up status screen still waits for you.
 
 ## Keys and settings
 
-- **F8** turns the mod on and off, with a note at the top of the screen. It starts **off**, and
-  remembers.
+- **F8** turns the mod on and off, with a note at the top of the screen (on a quest's map, under
+  the encounter bar). It starts **off**, and remembers.
 - Hold **F3** for the **Game Speed** page: **1** to **4** step an area through 1x, 1.5x, 2x, 3x and
   4x; **0** is the same as F8.
 - With loader 1.8.0 or newer, **Config → Mods → Game Speed** has the same settings: a checkbox for on
