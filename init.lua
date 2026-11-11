@@ -4,7 +4,8 @@
 --   Fight:       the fight itself, on top of the game's own battle speed.
 --   Level up:    the EXP bars and the level up animations. The status screen still waits for you.
 -- F8 turns it off and on; it starts off, and remembers. Hold F3 for the Game Speed page: 1-4 change each area, 0 is F8.
--- Config has the same settings in its Mods tab (loader 1.8.0).
+-- Config has the same settings in its Mods tab: the loader's rq.config.settings (1.2.2, loader 2.35.0),
+-- kept in rq.store (the profile's) under "on" and each area's id, as before.
 -- Sound stays at normal speed, and so does the play time on the save.
 
 local STEPS = { 1, 1.5, 2, 3, 4 }
@@ -32,9 +33,32 @@ local HOOKS = {
   { "戦闘リザルト_表示", "levelup" },
 }
 
+local names = {}
+for i, s in ipairs(STEPS) do names[i] = s .. "x" end
+local page_rows = {
+  { kind = "checkbox", key = "on", label = "Faster game clock (F8)", default = false },
+  { kind = "space", h = 8 },
+}
+for _, a in ipairs(AREAS) do
+  page_rows[#page_rows + 1] = { kind = "choice", key = a.id, label = a.label, options = names, values = STEPS,
+    default = 2, dir = "row", gap = 18 }
+end
+page_rows[#page_rows + 1] = { kind = "space", h = 12 }
+page_rows[#page_rows + 1] = { kind = "label", dim = true, size = 15,
+  text = "Sound and music stay at normal speed, and so does the play time." }
+page_rows[#page_rows + 1] = { kind = "label", dim = true, size = 15,
+  text = "The level up status screen still waits for you." }
+local settings = rq.config.settings{
+  id = "game-speed",
+  title = "Game Speed",
+  keep = "profile",
+  label_w = 150,
+  rows = page_rows,
+}
+
 local factor = {}
-for _, a in ipairs(AREAS) do factor[a.id] = rq.store.get(a.id, 2) end
-local on = rq.store.get("on", false)
+for _, a in ipairs(AREAS) do factor[a.id] = settings.get(a.id) end
+local on = settings.get("on")
 local stack = {}
 local note, note_until = nil, 0
 
@@ -89,12 +113,9 @@ end
 
 local rows = {}
 
+-- F8, the F3 page and Config all change the values through the settings, and this follows them.
 local function set_on(value)
-  on = value
-  rq.store.set("on", on)
-  rows.toggle()
-  apply()
-  show(summary())
+  settings.set("on", value)
 end
 
 function rows.toggle()
@@ -110,10 +131,7 @@ end
 local area_row
 
 local function set_factor(a, f)
-  factor[a.id] = f
-  rq.store.set(a.id, f)
-  area_row(a)
-  apply()
+  settings.set(a.id, f)
 end
 
 function area_row(a)
@@ -136,34 +154,22 @@ end
 rows.toggle()
 for _, a in ipairs(AREAS) do area_row(a) end
 
-if rq.config then
-  local names = {}
-  for i, s in ipairs(STEPS) do names[i] = s .. "x" end
-  local function step_of(f)
-    for i, s in ipairs(STEPS) do
-      if s == f then return i end
+settings.on_change(function(key, value)
+  if key == "on" then
+    on = value
+    rows.toggle()
+    apply()
+    show(summary())
+    return
+  end
+  for _, a in ipairs(AREAS) do
+    if a.id == key then
+      factor[key] = value
+      area_row(a)
+      apply()
     end
   end
-  rq.config.page{
-    id = "game-speed",
-    title = "Game Speed",
-    draw = function(ui)
-      local v, changed = ui.checkbox(on, "Faster game clock (F8)", { id = "on" })
-      if changed then set_on(v) end
-      ui.space(0, 8)
-      for _, a in ipairs(AREAS) do
-        ui.row({ gap = 16, align = "center", h = 30 }, function()
-          ui.label(a.label, { w = 150, dim = not on })
-          local i, c = ui.choice(names, step_of(factor[a.id]), { id = a.id, dir = "row", gap = 18 })
-          if c then set_factor(a, STEPS[i]) end
-        end)
-      end
-      ui.space(0, 12)
-      ui.label("Sound and music stay at normal speed, and so does the play time.", { dim = true, size = 15 })
-      ui.label("The level up status screen still waits for you.", { dim = true, size = 15 })
-    end,
-  }
-end
+end)
 
 local toggle_down = false
 rq.on_frame(function()

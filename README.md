@@ -21,8 +21,8 @@ The level up status screen still waits for you.
   the encounter bar). It starts **off**, and remembers.
 - Hold **F3** for the **Game Speed** page: **1** to **4** step an area through 1x, 1.5x, 2x, 3x and
   4x; **0** is the same as F8.
-- With loader 1.8.0 or newer, **Config → Mods → Game Speed** has the same settings: a checkbox for on
-  and off, and a row of speeds for each area.
+- **Config → Mods → Game Speed** has the same settings: a checkbox for on and off, and a row of
+  speeds for each area. **Reset** puts back off and 2x everywhere.
 
 ## Saves
 
@@ -35,8 +35,7 @@ mod sets the clock only when its own choice changes.
 
 ## Install
 
-Needs [RQ MOD](https://github.com/RQ-Modding/RQ-Mod) with loader **1.2.0** or newer (1.8.0 for the
-Config page). Extract the release zip into the game's `mods` folder, so that you have
+Needs [RQ MOD](https://github.com/RQ-Modding/RQ-Mod) with loader **2.35.0** or newer. Extract the release zip into the game's `mods` folder, so that you have
 `mods/game-speed/mod.json`.
 
 ## How it works

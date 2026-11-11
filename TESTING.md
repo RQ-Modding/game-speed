@@ -9,8 +9,9 @@ Check `logs\rqmod.log` for `Loading game-speed` first.
   first (the log line `Game speed: ...` at start, or the F8 note) and leave it as you found it.
 - **Debug page:** hold F3, page **Game Speed**: **0** on and off, **1** Exploration, **2**
   Transitions, **3** Fight, **4** Level up. Each of 1 to 4 steps through 1x, 1.5x, 2x, 3x, 4x and back.
-- **Config → Mods → Game Speed** (loader 1.8.0): kit widgets in section `kit` of `rqmod-ctl ui`,
-  such as `check-on` and `check-explore-4`.
+- **Config → Mods → Game Speed** (`rq.config.settings`, loader 2.35.0): kit widgets in section `kit`
+  of `rqmod-ctl ui`, such as `check-on`, `check-explore-4` and `button-reset` (off and 2x everywhere;
+  it changes your settings, so leave it alone unless the test puts them back).
 - No `rq.agent.control` ids.
 
 ## How to check it
