@@ -15,6 +15,9 @@ A fade inside a fight uses the Transitions speed. Everywhere else (town, menus, 
 runs at normal speed. Sound and music stay at normal speed, and so does the play time on the save.
 The level up status screen still waits for you.
 
+**3x and 4x in dialogue:** a scene's background changes run at the Transitions speed, and at 3x
+and 4x one can end with a black background. 2x or less is safe; the Mods tab page says so too.
+
 ## Keys and settings
 
 - **F8** turns the mod on and off, with a note at the top of the screen (on a quest's map, under

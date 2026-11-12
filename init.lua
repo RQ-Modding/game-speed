@@ -5,7 +5,8 @@
 --   Level up:    the EXP bars and the level up animations. The status screen still waits for you.
 -- F8 turns it off and on; it starts off, and remembers. Hold F3 for the Game Speed page: 1-4 change each area, 0 is F8.
 -- Config has the same settings in its Mods tab: the loader's rq.config.settings (1.2.2, loader 2.35.0),
--- kept in rq.store (the profile's) under "on" and each area's id, as before.
+-- kept in rq.store (the profile's) under "on" and each area's id, as before, with a warning on 3x and
+-- 4x in dialogue (1.2.3).
 -- Sound stays at normal speed, and so does the play time on the save.
 
 local STEPS = { 1, 1.5, 2, 3, 4 }
@@ -43,6 +44,13 @@ for _, a in ipairs(AREAS) do
   page_rows[#page_rows + 1] = { kind = "choice", key = a.id, label = a.label, options = names, values = STEPS,
     default = 2, dir = "row", gap = 18 }
 end
+-- 1.2.3: at 3x and 4x a scene's background change can end black (Transitions runs the scenes'
+-- screen effects). The cause is not found yet (notes/ideas-later.md, "Phase Q, batch 1, left").
+page_rows[#page_rows + 1] = { kind = "space", h = 8 }
+page_rows[#page_rows + 1] = { kind = "label", size = 16, color = { 255, 170, 110 },
+  text = "3x and 4x can break the scene changes in dialogue: the background may turn black." }
+page_rows[#page_rows + 1] = { kind = "label", size = 16, color = { 255, 170, 110 },
+  text = "2x or less is safe. Transitions is the area that runs them." }
 page_rows[#page_rows + 1] = { kind = "space", h = 12 }
 page_rows[#page_rows + 1] = { kind = "label", dim = true, size = 15,
   text = "Sound and music stay at normal speed, and so does the play time." }

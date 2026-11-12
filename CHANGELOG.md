@@ -3,6 +3,11 @@
 Each section is a version of the mod, the `version` in `mod.json`. The release workflow copies the
 section of a tagged version into the release notes.
 
+## 1.2.3
+
+- The Mods tab page warns that 3x and 4x can break the scene changes in dialogue (the background may
+  turn black), and that 2x or less is safe. The cause is being looked into; the speeds are unchanged.
+
 ## 1.2.2
 
 - The Config page is built with the loader's `rq.config.settings`: the same checkbox and rows,
