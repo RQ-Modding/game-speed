@@ -2,6 +2,16 @@
 
 Runs the game faster, with its own speed for each part of the game.
 
+## Showcase
+
+### Shortcuts in the Debug Menu
+
+<img width="575" height="453" alt="image" src="https://github.com/user-attachments/assets/f5530973-dea8-4d8d-906e-b3f259fb6d7e" />
+
+### Mod Options
+
+<img width="1253" height="905" alt="image" src="https://github.com/user-attachments/assets/6a783dcc-769a-4341-b616-4ebd79520302" />
+
 ## What it changes
 
 | Area | When | Default |
