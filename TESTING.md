@@ -19,7 +19,7 @@ Check `logs\rqmod.log` for `Loading game-speed` first.
 `rq.speed.get()` gives the clock's factor. On a quest map it is the Exploration factor, in a fight the
 Fight factor, on the result screen the Level up factor, and in town 1.
 
-## Test Lab
+## Tested in the game
 
-`agent-lab.ps1 run gamespeed`: exploration, F8 off and on, the way into a fight, the fight, the F3
-page, the result screen and the way out. `run configmods` checks the Config page.
+The Test Lab's scenario `gamespeed`: exploration, F8 off and on, the way into a fight, the fight, the F3
+page, the result screen and the way out. `configmods` checks the Config page.

@@ -45,7 +45,7 @@ for _, a in ipairs(AREAS) do
     default = 2, dir = "row", gap = 18 }
 end
 -- 1.2.3: at 3x and 4x a scene's background change can end black (Transitions runs the scenes'
--- screen effects). The cause is not found yet (notes/ideas-later.md, "Phase Q, batch 1, left").
+-- screen effects). The cause is not found yet.
 page_rows[#page_rows + 1] = { kind = "space", h = 8 }
 page_rows[#page_rows + 1] = { kind = "label", size = 16, color = { 255, 170, 110 },
   text = "3x and 4x can break the scene changes in dialogue: the background may turn black." }
